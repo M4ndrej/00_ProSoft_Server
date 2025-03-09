@@ -189,7 +189,7 @@ public class DbRepositoryGeneric implements DbRepository<OpstiDomenskiObjekat> {
     public List<OpstiDomenskiObjekat> readWithCondition(OpstiDomenskiObjekat odo) {
         List<OpstiDomenskiObjekat> lista = new ArrayList<>();
         String upit = "SELECT * FROM " + odo.vratiImeKlase() + " WHERE " + odo.vratiUslovNadjiSlogove();
-
+        System.out.println("Usao u bazu" + odo.vratiUslovNadjiSlogove());
         try (
                 Statement statement = Konekcija.getInstance().getConnection().createStatement(); ResultSet rs = statement.executeQuery(upit)) {
             while (rs.next()) {

@@ -16,8 +16,10 @@ import komunikacija.Receiver;
 import komunikacija.Request;
 import komunikacija.Response;
 import komunikacija.Sender;
+import model.Lokalitet;
 import model.Menadzer;
 import model.Privilegija;
+import model.Proizvod;
 
 /**
  *
@@ -72,6 +74,42 @@ public class ObradaKlijentskihZahteva extends Thread {
             }
             case Operacija.VRATI_ZAPOSLENE: {
                 vratiListuZaposlenih(request, response);
+                break;
+            }
+            case Operacija.FILTRIRAJ_ZAPOSLENI: {
+                vratiFilterZaposleni(request, response);
+                break;
+            }
+            case Operacija.VRATI_LOKALITET: {
+                vratiListuLokaliteta(request,response);
+                break;
+            }
+            case Operacija.FILTER_LOKALITET: {
+                vratiFilterLokalitet(request,response);
+                break;
+            }
+            case Operacija.KREIRAJ_LOKALITET:{
+                kreirajLokalitet(request,response);
+                break;
+            }
+            case Operacija.IZMENI_LOKALITET:{
+                izmeniLokalitet(request,response);
+                break;
+            }
+            case Operacija.OBRISI_LOKALITET:{
+                obrisiLokalitet(request,response);
+                break;
+            }
+            case Operacija.VRATI_PROIZVOD:{
+                vratiListuProizvod(request,response);
+                break;
+            }
+            case Operacija.FILTER_PROIZVOD: {
+                vratiFilterProizvod(request,response);
+                break;
+            }
+            case Operacija.KREIRAJ_PROIZVOD:{
+                kreirajProizvod(request,response);
                 break;
             }
             default:
@@ -148,6 +186,105 @@ public class ObradaKlijentskihZahteva extends Thread {
         }
         
         response.setOdgovor(zaposleni);
+    }
+
+    private void vratiFilterZaposleni(Request request, Response response) {
+        List<Menadzer> zaposleni = new ArrayList<>();
+        Menadzer menadzer = (Menadzer)request.getParametar();
+        try {
+            zaposleni = Controller.getInstance().vratiFilterZaposleni(menadzer);
+        } catch (Exception ex) {
+            Logger.getLogger(ObradaKlijentskihZahteva.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        response.setOdgovor(zaposleni);
+    }
+
+    private void vratiListuLokaliteta(Request request, Response response) {
+        List<Lokalitet> lokaliteti = new ArrayList<>();
+        try {
+            lokaliteti = Controller.getInstance().vratiListuLokaliteta(new Lokalitet());
+        } catch (Exception ex) {
+            Logger.getLogger(ObradaKlijentskihZahteva.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        response.setOdgovor(lokaliteti);
+    }
+
+    private void vratiFilterLokalitet(Request request, Response response) {
+        List<Lokalitet> lokaliteti = new ArrayList<>();
+        Lokalitet lokalitet = (Lokalitet)request.getParametar();
+        try {
+            lokaliteti = Controller.getInstance().vratiFilterLokalitet(lokalitet);
+        } catch (Exception ex) {
+            Logger.getLogger(ObradaKlijentskihZahteva.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        response.setOdgovor(lokaliteti);
+    }
+
+    private void kreirajLokalitet(Request request, Response response) {
+        Lokalitet lokalitet = (Lokalitet)request.getParametar();
+        
+        try {
+            Controller.getInstance().kreirajLokalitet(lokalitet);
+        } catch (Exception ex) {
+            Logger.getLogger(ObradaKlijentskihZahteva.class.getName()).log(Level.SEVERE, null, ex);
+            response.setExc(ex);
+        }
+    }
+
+    private void izmeniLokalitet(Request request, Response response) {
+        Lokalitet lokalitet = (Lokalitet)request.getParametar();
+        
+        try {
+            Controller.getInstance().izmeniLokalitet(lokalitet);
+        } catch (Exception ex) {
+            Logger.getLogger(ObradaKlijentskihZahteva.class.getName()).log(Level.SEVERE, null, ex);
+            response.setExc(ex);
+        }
+    }
+
+    private void obrisiLokalitet(Request request, Response response) {
+        Lokalitet lokalitet = (Lokalitet)request.getParametar();
+        
+        try {
+            Controller.getInstance().obrisiLokalitet(lokalitet);
+        } catch (Exception ex) {
+            Logger.getLogger(ObradaKlijentskihZahteva.class.getName()).log(Level.SEVERE, null, ex);
+            response.setExc(ex);
+        }
+        
+    }
+
+    private void vratiListuProizvod(Request request, Response response) {
+        List<Proizvod> proizvodi = new ArrayList<>();
+        
+        try {
+            proizvodi = Controller.getInstance().vratiListuProizvod(new Proizvod());
+        } catch (Exception ex) {
+            Logger.getLogger(ObradaKlijentskihZahteva.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        response.setOdgovor(proizvodi);
+    }
+
+    private void vratiFilterProizvod(Request request, Response response) {
+        List<Proizvod> proizvodi = new ArrayList<>();
+        Proizvod proizvod = (Proizvod)request.getParametar();
+        try {
+            proizvodi = Controller.getInstance().vratiFilterProizvod(proizvod);
+        } catch (Exception ex) {
+            Logger.getLogger(ObradaKlijentskihZahteva.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        response.setOdgovor(proizvodi);
+     }
+
+    private void kreirajProizvod(Request request, Response response) {
+        Proizvod proizvod = (Proizvod)request.getParametar();
+        try {
+            Controller.getInstance().kreirajProizvod(proizvod);
+        } catch (Exception ex) {
+            Logger.getLogger(ObradaKlijentskihZahteva.class.getName()).log(Level.SEVERE, null, ex);
+            response.setExc(ex);
+        }
     }
 
 }
