@@ -1,7 +1,4 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
+
 package konfiguracija;
 
 import java.io.File;
@@ -21,7 +18,8 @@ public class Konfiguracija {
     
     private static Konfiguracija instance;
     private Properties config = new Properties();
-    private static final String CONFIG_PATH = "C:\\Users\\Andrej\\Documents\\NetBeansProjects\\00_ProSoft_Server\\config.properties";
+    private String CONFIG_PATH = "config.properties";
+//    private static final String CONFIG_PATH = "C:\\Users\\Andrej\\Documents\\NetBeansProjects\\GreenBill\\config.properties";
     
     private Konfiguracija(){
         if(konfiguracijaPostoji()){
@@ -48,8 +46,12 @@ public class Konfiguracija {
         return instance;
     }
     
+    public void setConfig(String path){
+        CONFIG_PATH = path;
+    }
+    
     public String getPropertie(String key){
-        return config.getProperty(key,"n/a");
+        return config.getProperty(key,"");
     }
     
     public void setPropertie(String key, String value){

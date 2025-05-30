@@ -11,16 +11,19 @@ import operacije.ApstraktnaGenerickaOperacija;
  *
  * @author Andrej
  */
-public class KreirajLokalitet extends ApstraktnaGenerickaOperacija{
+public class KreirajLokalitet extends ApstraktnaGenerickaOperacija {
 
     @Override
     protected void preduslovi(Object obj) throws Exception {
-
+        boolean uspesno = broker.existsInDb((Lokalitet) obj);
+        if (uspesno) {
+            throw new Exception();
+        }
     }
 
     @Override
     protected void izvrsiOperaciju(Object obj) throws Exception {
-        broker.create((Lokalitet)obj);
+        broker.create((Lokalitet) obj);
     }
-    
+
 }

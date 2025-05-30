@@ -1,9 +1,6 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
 package view;
 
+import java.awt.Color;
 import server.Server;
 
 /**
@@ -14,12 +11,18 @@ public class ServerForma extends javax.swing.JFrame {
 
     Server server;
 
+    public KonfiguracijaBazaForma kbf;
+    public KonfiguracijaExportForma kef;
+    public KonfiguracijaPortForma kpf;
+    public InicijalizacijaKonfiguracijaForma ikf;
+
     public ServerForma() {
         initComponents();
         this.server = new Server();
         jLabelStatus.setText("");
         setLocationRelativeTo(null);
         setTitle("Server");
+        setResizable(false);
         jButtonZaustavi.setEnabled(false);
     }
 
@@ -35,12 +38,14 @@ public class ServerForma extends javax.swing.JFrame {
         jMenu1 = new javax.swing.JMenu();
         jButtonZaustavi = new javax.swing.JButton();
         jButtonPokreni = new javax.swing.JButton();
+        jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabelStatus = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu2 = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
         jMenuItem2 = new javax.swing.JMenuItem();
+        jMenuItemExport = new javax.swing.JMenuItem();
 
         jMenu1.setText("jMenu1");
 
@@ -60,13 +65,39 @@ public class ServerForma extends javax.swing.JFrame {
             }
         });
 
-        jLabel1.setText("Status");
+        jPanel1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jLabel1.setText("Status:");
+
+        jLabelStatus.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jLabelStatus.setForeground(new java.awt.Color(51, 255, 0));
         jLabelStatus.setText("Status");
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(128, 128, 128)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jLabelStatus, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(79, 79, 79))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap(45, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1)
+                    .addComponent(jLabelStatus))
+                .addGap(39, 39, 39))
+        );
 
         jMenu2.setText("KONFIGURACIJA");
 
-        jMenuItem1.setText("baza");
+        jMenuItem1.setText("Baza");
         jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItem1ActionPerformed(evt);
@@ -74,13 +105,21 @@ public class ServerForma extends javax.swing.JFrame {
         });
         jMenu2.add(jMenuItem1);
 
-        jMenuItem2.setText("port");
+        jMenuItem2.setText("Port");
         jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItem2ActionPerformed(evt);
             }
         });
         jMenu2.add(jMenuItem2);
+
+        jMenuItemExport.setText("Export");
+        jMenuItemExport.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemExportActionPerformed(evt);
+            }
+        });
+        jMenu2.add(jMenuItemExport);
 
         jMenuBar1.add(jMenu2);
 
@@ -91,55 +130,57 @@ public class ServerForma extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(80, 80, 80)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButtonPokreni))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 150, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jButtonZaustavi, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLabelStatus, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(93, 93, 93))
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(jButtonZaustavi, javax.swing.GroupLayout.DEFAULT_SIZE, 413, Short.MAX_VALUE)
+                    .addComponent(jButtonPokreni, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(139, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
-                    .addComponent(jLabelStatus))
-                .addGap(62, 62, 62)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButtonZaustavi, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButtonPokreni, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(84, 84, 84))
+                .addGap(40, 40, 40)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jButtonPokreni, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(30, 30, 30)
+                .addComponent(jButtonZaustavi, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(14, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
-        KonfiguracijaBazaForma kbf = new KonfiguracijaBazaForma(this, true);
+        kbf = new KonfiguracijaBazaForma(this, true);
         kbf.setVisible(true);
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
     private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
-        KonfiguracijaPortForma kpf = new KonfiguracijaPortForma(this, true);
+        kpf = new KonfiguracijaPortForma(this, true);
         kpf.setVisible(true);
     }//GEN-LAST:event_jMenuItem2ActionPerformed
 
     private void jButtonPokreniActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonPokreniActionPerformed
         server.start();
         jLabelStatus.setText("POKRENUT");
+        jLabelStatus.setForeground(new Color(0, 200, 0));
         jButtonZaustavi.setEnabled(true);
         jButtonPokreni.setEnabled(false);
     }//GEN-LAST:event_jButtonPokreniActionPerformed
 
     private void jButtonZaustaviActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonZaustaviActionPerformed
         jLabelStatus.setText("ZAUSTAVLJEN");
+        jLabelStatus.setForeground(new Color(200, 0, 0));
         jButtonPokreni.setEnabled(true);
         jButtonZaustavi.setEnabled(false);
     }//GEN-LAST:event_jButtonZaustaviActionPerformed
+
+    private void jMenuItemExportActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemExportActionPerformed
+        kef = new KonfiguracijaExportForma(this, true);
+        kef.setVisible(true);
+    }//GEN-LAST:event_jMenuItemExportActionPerformed
 
     /**
      * @param args the command line arguments
@@ -171,9 +212,14 @@ public class ServerForma extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new ServerForma().setVisible(true);
+                
             }
         });
+    }
+
+    public boolean isValidData() {
+        System.out.println(kpf.isPortValid() && kef.isExportValid() && kbf.isBazaValid());
+        return kpf.isPortValid() && kef.isExportValid() && kbf.isBazaValid();
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -186,5 +232,7 @@ public class ServerForma extends javax.swing.JFrame {
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem2;
+    private javax.swing.JMenuItem jMenuItemExport;
+    private javax.swing.JPanel jPanel1;
     // End of variables declaration//GEN-END:variables
 }

@@ -31,7 +31,7 @@ public class VratiPrivilegiju extends ApstraktnaGenerickaOperacija{
     @Override
     protected void izvrsiOperaciju(Object obj) throws Exception {
         Menadzer menadzer = (Menadzer)obj;
-        List<OpstiDomenskiObjekat> lista = broker.readMenadzerPrivilegijaWithPrivilegijaMenadzer(new MenadzerPrivilegija());
+        List<OpstiDomenskiObjekat> lista = brokerSpecific.readMenadzerPrivilegijaWithPrivilegijaMenadzer(new MenadzerPrivilegija());
         for(OpstiDomenskiObjekat o: lista){
             MenadzerPrivilegija mp = (MenadzerPrivilegija)o;
             if(mp.getMenadzer().equals(menadzer)){

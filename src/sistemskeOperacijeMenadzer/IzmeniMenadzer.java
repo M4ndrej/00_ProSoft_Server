@@ -13,20 +13,15 @@ import operacije.ApstraktnaGenerickaOperacija;
  */
 public class IzmeniMenadzer extends ApstraktnaGenerickaOperacija{
     
-    private boolean izmenjenMenadzer;
-    
-    public boolean getIzmenjenMenadzer(){
-        return izmenjenMenadzer;
-    }
+
 
     @Override
     protected void preduslovi(Object obj) throws Exception {
-        
     }
 
     @Override
     protected void izvrsiOperaciju(Object obj) throws Exception {
-        izmenjenMenadzer = broker.update((Menadzer)obj);
+        broker.update((Menadzer)obj);
     }
     
 }

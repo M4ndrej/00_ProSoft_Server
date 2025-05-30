@@ -5,6 +5,8 @@
 package sistemskeOperacijeMenadzer;
 
 import model.Menadzer;
+import model.MenadzerPrivilegija;
+import model.Otpremnica;
 import operacije.ApstraktnaGenerickaOperacija;
 
 /**
@@ -21,7 +23,10 @@ public class UgasiNalog extends ApstraktnaGenerickaOperacija{
 
     @Override
     protected void preduslovi(Object obj) throws Exception {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        boolean uspesno = broker.existRelation((Menadzer)obj, new Otpremnica()) || broker.existRelation((Menadzer)obj, new MenadzerPrivilegija());
+        if(uspesno){
+            throw new Exception();
+        }
     }
 
     @Override

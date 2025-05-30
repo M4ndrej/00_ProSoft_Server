@@ -15,6 +15,10 @@ public class KreirajProizvod extends ApstraktnaGenerickaOperacija{
 
     @Override
     protected void preduslovi(Object obj) throws Exception {
+        boolean uspesno = broker.existsInDb((Proizvod) obj);
+        if (uspesno) {
+            throw new Exception();
+        }
     }
 
     @Override

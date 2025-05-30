@@ -11,9 +11,7 @@ import operacije.ApstraktnaGenerickaOperacija;
  *
  * @author Andrej
  */
-public class IzmeniLokalitet extends ApstraktnaGenerickaOperacija{
-    
-    
+public class IzmeniLokalitet extends ApstraktnaGenerickaOperacija {
 
     @Override
     protected void preduslovi(Object obj) throws Exception {
@@ -22,7 +20,7 @@ public class IzmeniLokalitet extends ApstraktnaGenerickaOperacija{
 
     @Override
     protected void izvrsiOperaciju(Object obj) throws Exception {
-        broker.update((Lokalitet)obj);
+        broker.update((Lokalitet) obj);
     }
-    
+
 }

@@ -20,6 +20,7 @@ public class KonfiguracijaPortForma extends javax.swing.JDialog {
         super(parent, modal);
         initComponents();
         setLocationRelativeTo(parent);
+        jTextFieldPort.setText(Konfiguracija.getInstance().getPropertie("port"));
         setDefaultCloseOperation(this.DISPOSE_ON_CLOSE);
     }
 
@@ -77,19 +78,25 @@ public class KonfiguracijaPortForma extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButtonSacuvajActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSacuvajActionPerformed
+        if (!jTextFieldPort.getText().matches("^[1-9]\\d{0,4}$")) {
+            JOptionPane.showMessageDialog(this, "Format porta nije validan", "Greška", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
         int port = Integer.parseInt(jTextFieldPort.getText());
-        if(port  > 0 && port <= 65535){
-            Konfiguracija.getInstance().setPropertie("port", port+"");
+        if (port > 0 && port <= 65535) {
+            Konfiguracija.getInstance().setPropertie("port", port + "");
             Konfiguracija.getInstance().sacuvajIzmene();
         }
-        JOptionPane.showMessageDialog(this, "Uspešno izmenjen port","Uspešno",JOptionPane.INFORMATION_MESSAGE);
+        JOptionPane.showMessageDialog(this, "Uspešno izmenjen port", "Uspešno", JOptionPane.INFORMATION_MESSAGE);
         this.dispose();
     }//GEN-LAST:event_jButtonSacuvajActionPerformed
-
+    public boolean isPortValid(){
+        return !jTextFieldPort.getText().isEmpty();
+    }
     /**
      * @param args the command line arguments
      */
-   
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonSacuvaj;
     private javax.swing.JLabel jLabel1;

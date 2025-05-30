@@ -1,9 +1,11 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
+
 package main_server;
 
+import javax.swing.SwingUtilities;
+import view.InicijalizacijaKonfiguracijaForma;
+import view.KonfiguracijaBazaForma;
+import view.KonfiguracijaExportForma;
+import view.KonfiguracijaPortForma;
 import view.ServerForma;
 
 /**
@@ -11,10 +13,22 @@ import view.ServerForma;
  * @author Andrej
  */
 public class Main {
-    
+
     public static void main(String[] args) {
-        ServerForma sf = new ServerForma();
-        sf.setVisible(true);
+        AppStyles.setLookAndFeel();
+        SwingUtilities.invokeLater(() -> {
+            ServerForma serverForma = new ServerForma();
+                serverForma.kpf = new KonfiguracijaPortForma(serverForma, true);
+                serverForma.kef = new KonfiguracijaExportForma(serverForma, true);
+                serverForma.kbf = new KonfiguracijaBazaForma(serverForma, true);
+                if (serverForma.isValidData()) {
+                    serverForma.setVisible(true);
+                } else {
+                    InicijalizacijaKonfiguracijaForma iniForma = new InicijalizacijaKonfiguracijaForma(serverForma, true);
+                    iniForma.setVisible(true);
+                }
+        });
+
     }
-    
+
 }

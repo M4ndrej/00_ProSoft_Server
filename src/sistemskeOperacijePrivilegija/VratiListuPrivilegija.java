@@ -12,16 +12,14 @@ import operacije.ApstraktnaGenerickaOperacija;
  *
  * @author Andrej
  */
-public class VratiListuPrivilegija extends ApstraktnaGenerickaOperacija{
-    
+public class VratiListuPrivilegija extends ApstraktnaGenerickaOperacija {
+
     private List<Privilegija> lista;
 
     public List<Privilegija> getLista() {
         return lista;
     }
-    
-    
- 
+
     @Override
     protected void preduslovi(Object obj) throws Exception {
     }
@@ -30,5 +28,5 @@ public class VratiListuPrivilegija extends ApstraktnaGenerickaOperacija{
     protected void izvrsiOperaciju(Object obj) throws Exception {
         lista = broker.read(new Privilegija());
     }
-    
+
 }

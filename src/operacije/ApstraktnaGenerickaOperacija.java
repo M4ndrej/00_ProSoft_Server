@@ -5,9 +5,11 @@
 package operacije;
 
 import java.sql.SQLException;
-import repository.Repository;
 import repository.db.DbRepository;
 import repository.db.implementation.DbRepositoryGeneric;
+import repository.RepositoryGeneric;
+import repository.RepositorySpecific;
+import repository.db.implementation.DbRepositorySpecific;
 
 /**
  *
@@ -15,10 +17,12 @@ import repository.db.implementation.DbRepositoryGeneric;
  */
 public abstract class ApstraktnaGenerickaOperacija {
 
-    protected final Repository broker;
+    protected final RepositoryGeneric broker;
+    protected final RepositorySpecific brokerSpecific;
 
     public ApstraktnaGenerickaOperacija() {
         this.broker = new DbRepositoryGeneric();
+        this.brokerSpecific = new DbRepositorySpecific();
     }
 
     public final void izvrsi(Object obj) throws Exception {

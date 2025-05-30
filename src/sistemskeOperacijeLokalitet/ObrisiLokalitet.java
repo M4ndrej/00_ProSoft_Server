@@ -5,22 +5,26 @@
 package sistemskeOperacijeLokalitet;
 
 import model.Lokalitet;
+import model.Otpremac;
 import operacije.ApstraktnaGenerickaOperacija;
 
 /**
  *
  * @author Andrej
  */
-public class ObrisiLokalitet extends ApstraktnaGenerickaOperacija{
+public class ObrisiLokalitet extends ApstraktnaGenerickaOperacija {
 
     @Override
     protected void preduslovi(Object obj) throws Exception {
-
+        boolean uspesno = broker.existRelation((Lokalitet) obj, new Otpremac());
+        if (uspesno) {
+            throw new Exception();
+        }
     }
 
     @Override
     protected void izvrsiOperaciju(Object obj) throws Exception {
-        broker.delete((Lokalitet)obj);
+        broker.delete((Lokalitet) obj);
     }
-    
+
 }
