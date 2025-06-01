@@ -197,4 +197,25 @@ public class DbRepositorySpecific implements RepositorySpecific{
         }
         return lista;
     }
+
+    @Override
+    public boolean prijavi(Menadzer menadzer) {
+   
+        try (Statement statement = Konekcija.getInstance().getConnection().createStatement()) {
+            String upit = "SELECT * FROM menadzer WHERE jmbgMenadzer='"+menadzer.getJmbg()+"' AND lozinka='"+menadzer.getLozinka()+"'";
+            System.out.println(upit);
+            try (ResultSet rs = statement.executeQuery(upit)) {
+                if (rs.next()) {
+                    menadzer.napuni(rs);
+                    return true;
+                }
+                return false;
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(DBBroker.class.getName()).log(Level.SEVERE, null, ex);
+            return false;
+        }
+    }
+    
+    
 }

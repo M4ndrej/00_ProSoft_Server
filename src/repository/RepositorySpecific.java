@@ -5,6 +5,7 @@
 package repository;
 
 import java.util.List;
+import model.Menadzer;
 import model.MenadzerPrivilegija;
 import model.OpstiDomenskiObjekat;
 import model.Otpremac;
@@ -29,4 +30,6 @@ public interface RepositorySpecific {
     public boolean readWithConditionDoznakaOtprema(List<Object[]> podaci);
 
     public List<OpstiDomenskiObjekat> readMenadzerPrivilegijaWithPrivilegijaMenadzer(MenadzerPrivilegija menadzerPrivilegija);
+    
+    public boolean prijavi(Menadzer menadzer);
 }

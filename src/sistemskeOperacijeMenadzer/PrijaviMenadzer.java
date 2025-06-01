@@ -13,7 +13,7 @@ import operacije.ApstraktnaGenerickaOperacija;
  * @author Andrej
  */
 public class PrijaviMenadzer extends ApstraktnaGenerickaOperacija {
-    
+
     private Menadzer ulogovani;
 
     public Menadzer getUlogovani() {
@@ -22,19 +22,20 @@ public class PrijaviMenadzer extends ApstraktnaGenerickaOperacija {
 
     @Override
     protected void preduslovi(Object obj) throws Exception {
-        
+
     }
 
     @Override
     protected void izvrsiOperaciju(Object obj) throws Exception {
-        List<Menadzer> menadzeri = broker.read((Menadzer)obj);
-        for(Menadzer m: menadzeri){
-            if(m.getJmbg().equals(((Menadzer)obj).getJmbg()) && m.getLozinka().equals(((Menadzer)obj).getLozinka())){
-                ulogovani = m;
-                return;
-            }
+        Menadzer men = (Menadzer) obj;
+        
+        boolean uspesno = brokerSpecific.prijavi(men);
+        if (uspesno) {
+            ulogovani = men;
+        } else {
+            ulogovani = null;
         }
-        ulogovani = null;
+
     }
 
 }

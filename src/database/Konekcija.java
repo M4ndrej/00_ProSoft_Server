@@ -33,9 +33,9 @@ public class Konekcija {
     public Konekcija() {
         
         try {
-            String url = "jdbc:mysql://localhost:3306/ps_seminarski";
-            String username = "andrej";
-            String password = "andrej";
+            String url = "jdbc:mysql://localhost:3306/prosoft_andrej";
+            String username = "root";
+            String password = "admin";
             connection = DriverManager.getConnection(url, username, password);
             connection.setAutoCommit(false);
         } catch (SQLException ex) {
